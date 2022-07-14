@@ -2,12 +2,12 @@ import socket
 import sys
 import time
 
-lat_points = []
-lon_points = []
+lat_points = [''] # Points from coords.py
+lon_points = ['']
 
 
-call = b'N0CALL'
-passcode = b''
+call = b'F4KECALL'
+passcode = b'29086'
 
 server = 'noam.aprs2.net'
 port = 14580
@@ -44,7 +44,8 @@ def main():
     r = connection.recv(1024)
     print('logged in: ' + str(r))
 
-    for i in range(points):
+    while True:
+        i = 0
         lat = bytes(lat_points[i], 'utf-8')
         lon = bytes(lon_points[i], 'utf-8')
         set_posit(connection, lat, lon, message)
